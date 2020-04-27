@@ -6,6 +6,8 @@ using namespace std;
 //initializing game to false (meaning no winner determined yet)
 bool gameStatus = false;
 
+int currPlayer = 1;
+
 //initialize the 3x3 board
 char board[3][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
 
@@ -19,6 +21,14 @@ void printBoard()
     std::cout << "---" << "---" << "---" << "---" << "---" << std::endl;
     std::cout << " " << board[2][0] << " " << " | " << " " << board[2][1] << " " << " | " << " " << board[2][2] << std::endl;
     std::cout << std::endl;
+}
+
+void checkGameStatus()
+{
+    if(board[0][0] == board[0][1] && board[0][1] == board[0][2])
+    {
+        gameStatus = true;
+    }
 }
 
 int main()
@@ -53,7 +63,6 @@ int main()
             player1 = 'O';
         }
     }
-    std::cout << player1 << std::endl;
 
     //if player 1 chooses O, player 2 will automatically be X and vice versa
     if(player1 == 'o' || player1 == 'O')
@@ -73,7 +82,7 @@ int main()
         //to keep track of all numbers entered by players
         vector<int> list;
 
-        std::cout << "Player, please select a number from 1-9 to place your icon on the board." << std::endl;
+        std::cout << "Player " << currPlayer << ", please select a number from 1-9 to place your icon on the board." << std::endl;
         std::cout << "Enter here: ";
         std::cin >> p1selection;
 
@@ -94,18 +103,172 @@ int main()
             std::cout << std::endl;
             taken = false;
         }
-    
-        if(player1 == 'X' && p1selection == 1)
+
+        //player1 logic
+        if(currPlayer == 1)
         {
-            board[0][0] = 'X';
+            if(player1 == 'X' && p1selection == 1)
+            {
+                board[0][0] = 'X';
+            }
+            else if(player1 == 'O' && p1selection == 1)
+            {
+                board[0][0] = 'O';
+            }
+            else if(player1 == 'X' && p1selection == 2)
+            {
+                board[0][1] = 'X';
+            }
+            else if(player1 == 'O' && p1selection == 2)
+            {
+                board[0][1] = 'O';
+            }
+            else if(player1 == 'X' && p1selection == 3)
+            {
+                board[0][2] = 'X';
+            }
+            else if(player1 == 'O' && p1selection == 3)
+            {
+                board[0][2] = 'O';
+            }
+            else if(player1 == 'X' && p1selection == 4)
+            {
+                board[1][0] = 'X';
+            }
+            else if(player1 == 'O' && p1selection == 4)
+            {
+                board[1][0] = 'O';
+            }
+            else if(player1 == 'X' && p1selection == 5)
+            {
+                board[1][1] = 'X';
+            }
+            else if(player1 == 'O' && p1selection == 5)
+            {
+                board[1][1] = 'O';
+            }
+            else if(player1 == 'X' && p1selection == 6)
+            {
+                board[1][2] = 'X';
+            }
+            else if(player1 == 'O' && p1selection == 6)
+            {
+                board[1][2] = 'O';
+            }
+            else if(player1 == 'X' && p1selection == 7)
+            {
+                board[2][0] = 'X';
+            }
+            else if(player1 == 'O' && p1selection == 7)
+            {
+                board[2][0] = 'O';
+            }
+            else if(player1 == 'X' && p1selection == 8)
+            {
+                board[2][1] = 'X';
+            }
+            else if(player1 == 'O' && p1selection == 8)
+            {
+                board[2][1] = 'O';
+            }
+            else if(player1 == 'X' && p1selection == 9)
+            {
+                board[2][2] = 'X';
+            }
+            else if(player1 == 'O' && p1selection == 9)
+            {
+                board[2][2] = 'O';
+            }
         }
-        else if(player1 == 'O' && p1selection == 1)
+        else
         {
-            board[0][0] = 'O';
+            //player2 logic
+            if(player2 == 'X' && p1selection == 1)
+            {
+                board[0][0] = 'X';
+            }
+            else if(player2 == 'O' && p1selection == 1)
+            {
+                board[0][0] = 'O';
+            }
+            else if(player2 == 'X' && p1selection == 2)
+            {
+                board[0][1] = 'X';
+            }
+            else if(player2 == 'O' && p1selection == 2)
+            {
+                board[0][1] = 'O';
+            }
+            else if(player2 == 'X' && p1selection == 3)
+            {
+                board[0][2] = 'X';
+            }
+            else if(player2 == 'O' && p1selection == 3)
+            {
+                board[0][2] = 'O';
+            }
+            else if(player2 == 'X' && p1selection == 4)
+            {
+                board[1][0] = 'X';
+            }
+            else if(player2 == 'O' && p1selection == 4)
+            {
+                board[1][0] = 'O';
+            }
+            else if(player2 == 'X' && p1selection == 5)
+            {
+                board[1][1] = 'X';
+            }
+            else if(player2 == 'O' && p1selection == 5)
+            {
+                board[1][1] = 'O';
+            }
+            else if(player2 == 'X' && p1selection == 6)
+            {
+                board[1][2] = 'X';
+            }
+            else if(player2 == 'O' && p1selection == 6)
+            {
+                board[1][2] = 'O';
+            }
+            else if(player2 == 'X' && p1selection == 7)
+            {
+                board[2][0] = 'X';
+            }
+            else if(player2 == 'O' && p1selection == 7)
+            {
+                board[2][0] = 'O';
+            }
+            else if(player2 == 'X' && p1selection == 8)
+            {
+                board[2][1] = 'X';
+            }
+            else if(player2 == 'O' && p1selection == 8)
+            {
+                board[2][1] = 'O';
+            }
+            else if(player2 == 'X' && p1selection == 9)
+            {
+                board[2][2] = 'X';
+            }
+            else if(player2 == 'O' && p1selection == 9)
+            {
+                board[2][2] = 'O';
+            }
         }
             
         printBoard();
-        gameStatus = true;
+        checkGameStatus();
+
+        //switching player
+        if(currPlayer == 1)
+        {
+            currPlayer = 2;
+        }
+        else
+        {
+            currPlayer = 1;
+        }
     }
 
 
