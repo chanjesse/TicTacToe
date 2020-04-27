@@ -3,9 +3,7 @@
 #include <cctype>
 using namespace std;
 
-//initializing game to false (meaning no winner determined yet)
-//hellosafdfsdf
-
+//initializing game to false (meaning no winner determined yet
 bool gameStatus = false;
 
 int currPlayer = 1;
