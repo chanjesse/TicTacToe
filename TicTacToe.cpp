@@ -4,6 +4,7 @@
 using namespace std;
 
 //initializing game to false (meaning no winner determined yet)
+//hello
 bool gameStatus = false;
 
 int currPlayer = 1;
