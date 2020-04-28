@@ -8,6 +8,9 @@ bool gameStatus = false;
 
 int currPlayer = 1;
 
+//to keep track of all numbers entered by players
+vector<int> list;
+
 //initialize the 3x3 board
 char board[3][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
 
@@ -23,9 +26,37 @@ void printBoard()
     std::cout << std::endl;
 }
 
-void checkGameStatus()
+void checkGameStatus(bool &gameStatus)
 {
     if(board[0][0] == board[0][1] && board[0][1] == board[0][2])
+    {
+        gameStatus = true;
+    }
+    else if(board[1][0] == board[1][1] && board[1][1] == board[1][2])
+    {
+        gameStatus = true;
+    }
+    else if(board[2][0] == board[2][1] && board[2][1] == board[2][2])
+    {
+        gameStatus = true;
+    }
+    else if(board[0][0] == board[1][0] && board[1][0] == board[2][0])
+    {
+        gameStatus = true;
+    }
+    else if(board[0][1] == board[1][1] && board[1][1] == board[2][1])
+    {
+        gameStatus = true;
+    }
+    else if(board[0][2] == board[1][2] && board[1][2] == board[2][2])
+    {
+        gameStatus = true;
+    }
+    else if(board[0][0] == board[1][1] && board[1][1] == board[2][2])
+    {
+        gameStatus = true;
+    }
+    else if(board[0][2] == board[1][1] && board[1][1] == board[2][0])
     {
         gameStatus = true;
     }
@@ -76,24 +107,25 @@ int main()
 
     while(gameStatus != true)
     {
-        int p1selection, p2selection;
+        int p1selection;
         bool taken = false;
-
-        //to keep track of all numbers entered by players
-        vector<int> list;
 
         std::cout << "Player " << currPlayer << ", please select a number from 1-9 to place your icon on the board." << std::endl;
         std::cout << "Enter here: ";
         std::cin >> p1selection;
 
         //check if number selection is in array, if not add, if so ask player to enter new number that's not taken
-        for (std::vector<int>::iterator it = list.begin(); it !=list.end(); it++)
-        {
-            if(*it == p1selection)
-            {
-                taken = true;
-            }
+        if (std::find(list.begin(), list.end(), p1selection) != list.end())
+        { 
+            //if found taken will be true
+            taken = true;
         }
+        else
+        {
+            //adding selection to vector list to keep track of taken numbers
+            list.push_back(p1selection);
+        }
+        
 
         while(taken == true)
         { 
@@ -101,7 +133,17 @@ int main()
             std::cout << "Enter here: ";
             std::cin >> p1selection;
             std::cout << std::endl;
-            taken = false;
+            if (std::find(list.begin(), list.end(), p1selection) != list.end())
+            {
+                taken = true;
+            }
+            else
+            {
+                taken = false;
+
+                //adding selection to vector list to keep track of taken numbers
+                list.push_back(p1selection);
+            }
         }
 
         //player1 logic
@@ -258,7 +300,7 @@ int main()
         }
             
         printBoard();
-        checkGameStatus();
+        checkGameStatus(gameStatus);
 
         //switching player
         if(currPlayer == 1)
@@ -270,6 +312,22 @@ int main()
             currPlayer = 1;
         }
     }
+
+    //clearing vector
+    list.clear();
+
+    //switching player again
+    if(currPlayer == 1)
+    {
+        currPlayer = 2;
+    }
+    else
+    {
+        currPlayer = 1;
+    }
+
+    //winner or draw message
+    std::cout << "Congratulations! Player " << currPlayer << " has won!" << std::endl;
 
 
     return 0;
